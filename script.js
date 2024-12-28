@@ -25,7 +25,17 @@ function displayBooks(books){
         <p>Category:${book.category}</p>
         <p>Availiability Status:${book.isAvailiable ? 'Availiable' : 'Borrowed'}</p>
         <p>Borrowed Days:${book.borrowedDays || 0}</p>
-        
-        `
+        <button class="delete=button">Delete Book</button>
+        `;
+        bookCard.querySelector('.verify-button').addEventListener('click',()=>{
+            if(confirm(`Are you sure to verify $ {book.title}?`)){
+                book.isVerified=true;
+                bookCard.querySelector('.verify-button').disables=true;
+                fetch(`http://localhost3000/books/$book.id}`,{
+                    method:`PATCH`,
+                    headers:{'Content-type':'application/json'},
+                }
+            }
+        })
     }
 }
